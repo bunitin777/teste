@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Paises participantes da copa</title>
+<header>
+  <img src="/img/banner copa.webp"
+       style="width:80px; margin-bottom:10px;">
+  
+  <h1>Países participantes da Copa do Mundo</h1>
+
+  <img src="/img/fifa.jpg"
+       style="width:120px; margin-top:10px;">
+</header>
+<div style="text-align:center; margin-top:10px;">
+     
+</div>
+<div style="text-align:center; margin-top:10px;">
+  <p>🏟️ Países sede:</p>
+
+  <img src="https://flagcdn.com/w80/us.png">
+  <img src="https://flagcdn.com/w80/mx.png">
+  <img src="https://flagcdn.com/w80/ca.png">
+</div>
+<div style="text-align:center; margin:15px;">
+</div>
+<div style="text-align:center; margin:20px;">
+  <a href="top10.html">
+    <button style="font-size:16px; padding:10px 20px; background:#00b894; color:white;">
+      ⭐ Ver Lendas do Futebol
+    </button>
+    <div style="text-align:center; margin:20px;">
+  <a href="tabelas.html">
+    <button style="
+      font-size:16px;
+      padding:10px 20px;
+      background:#f1c40f;
+      color:black;
+      font-weight:bold;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+    ">
+      🏆 Simular Copa 2026
+    </button>
+  </a>
+</div>
+    
+  </a>
+</div>
+<style>
+  
+  header img {
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.4));
+}
+
+header {
+  background: rgba(0,0,0,0.2);
+  border-bottom: 2px solid rgba(255,255,255,0.2);
+}
+body {
+  font-family: Arial;
+  margin: 0;
+  background: linear-gradient(120deg,#0f2027,#203a43,#2c5364);
+  color: white;
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+.card {
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.08);
+}
+
+.card img {
+  width: 80px;
+}
+
+/* DETALHE */
+#detalhe {
+  display: none;
+  padding: 20px;
+}
+
+.jogadores img {
+  height: 100px;
+  width: 109px;
+  margin: 5px;
+}
+
+button {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+#detalhe {
+  animation: aparecer 0.4s ease;
+}
+
+@keyframes aparecer {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+</header>
+
+<div class="container" id="container"></div>
+<div id="detalhe"></div>
+
+<script>
+const dados = {
+  
+"Brasil": {
+  titulos: "5 Copas do Mundo",
+  historia: "Maior campeão da história da Copa.",
+  jogadores: [
+    ["Neymar","/img/ney.jpg"],
+["Vinicius Jr.", "/img/vini jr.avif"],  ],
+  lendas: [
+    ["Pelé","/img/pelé.jpg"],
+    ["Ronaldo","/img/ronaldo.webp"]
+  ]
+},
+
+"Argentina": {
+  titulos: "3 Copas do Mundo",
+  historia: "Atual campeã mundial.",
+  jogadores: [
+    ["Messi","/img/messi.webp"],
+    ["Di maria","/img/dimaria.avif"]],
+  lendas: [
+    ["Maradona","/img/maradona.jpg"],
+    ["Batistuta","/img/batistuta.webp"]
+  ]
+},
+
+"França": {
+  titulos: "2 Copas do Mundo",
+  historia: "Uma das seleções mais fortes do mundo.",
+  jogadores: [
+    ["Mbappé","https://img.a.transfermarkt.technology/portrait/big/342229-1682683695.jpg"],
+    ["Griezmann","/img/griz.webp"]
+  ],
+  lendas: [
+    ["Zidane","/img/zidane.jpeg"],
+    ["Henry","/img/henry.jpg"]
+  ]
+},
+
+"Alemanha": {
+  titulos: "4 Copas do Mundo",
+  historia: "Uma das maiores seleções da história.",
+  jogadores: [
+    ["Musiala","/img/musiala.jpeg"],
+    ["Manuel neuer","/img/neuer.webp"]
+  
+  ],
+  lendas: [
+    ["Beckenbauer","/img/alemao.jpeg"],
+    ["Gerd Müller","/img/Gerd Müller.jpg"]
+  ]
+},
+
+"Espanha": {
+  titulos: "1 Copa do Mundo",
+  historia: "Campeã em 2010.",
+  jogadores: [
+    ["Pedri","/img/pedri.jpeg"],
+        ["yamal","/img/yamal.jpeg"]
+
+  ],
+  lendas: [
+    ["Iniesta","/img/iniesta.jpeg"],
+     ["Xavi","/img/xavi.jpeg"]
+  ]
+},
+"Portugal": {
+  titulos: "0 Copas do Mundo",
+  historia: "Seleção forte da Europa, liderada por Cristiano Ronaldo.",
+  jogadores: [
+    ["Cristiano Ronaldo","/img/cr7.jpeg"],
+    ["Bruno Fernandes","/img/brunof.jpeg"]
+  ],
+  lendas: [
+    ["eusebio","/img/eusebio.jpeg"],
+    ["Luís Figo","/img/figo.jpeg"]
+  ]
+},
+
+"Suíça": {
+  titulos: "0 copa do mundo",
+  historia: "Seleção organizada e competitiva.",
+  jogadores: [
+    ["Xhaka","/img/xhaka.jpg"],
+    ["Shaqiri","/img/Shaqiri.webp"]
+  ],
+  lendas: [
+    ["Frei","/img/Frei.jpg"],
+    ["Senderos","/img/Senderos.jpg"]
+  ]
+},
+
+"Holanda": {
+  titulos: "0 Copas do Mundo",
+  historia: "Famosa pelo futebol total.",
+  jogadores: [
+    ["Van Dijk","/img/Van Dijk.jpeg"],
+    ["Depay","/img/depay.jpeg"]
+  ],
+  lendas: [
+    ["Cruyff","/img/Johan Cruyff.jpeg"],
+    ["Van Basten","/img/Van Basten.jpeg"]
+  ]
+},
+
+"Bélgica": {
+  titulos: "0 Copas do Mundo",
+  historia: "Geração dourada recente.",
+  jogadores: [
+    ["De Bruyne","/img/De Bruyne.jpeg"],
+    ["Lukaku","/img/Lukaku.jpeg"]
+  ],
+  lendas: [
+    ["Hazard","/img/Eden Hazard.jpeg"],
+    ["Kompany","/img/Vincent Kompany.jpeg"]
+  ]
+},
+
+"Uruguai": {
+  titulos: "2 Copas do Mundo",
+  historia: "Primeiro campeão da história (1930).",
+  jogadores: [
+    ["Valverde","/img/Valverde.jpeg"],
+    ["Darwin Núñez","/img/Darwin Núñez.jpeg"]
+  ],
+  lendas: [
+    ["Suárez","/img/Suárez.jpeg"],
+    ["Forlán","/img/Forlán.jpeg"]
+  ]
+},
+
+"Croácia": {
+  titulos: "0 Copas do Mundo",
+  historia: "Vice-campeã em 2018.",
+  jogadores: [
+    ["Modrić","/img/Modrić.jpeg"],
+    ["Perišić","/img/Perišić.jpeg"]
+  ],
+  lendas: [
+    ["Davor Šuker","/img/Davor Šuker.jpeg"],
+    ["Rakitić","/img/raki.jpeg"]
+  ]
+},
+
+"México": {
+  titulos: "0 Copas do Mundo",
+  historia: "Sempre presente nas Copas.",
+  jogadores: [
+    ["Lozano","/img/Lozano.webp"],
+    ["Ochoa","/img/ochoa.webp"]
+  ],
+  lendas: [
+    ["Chicharito","/img/Chicharito.jpg"],
+    ["Hugo Sánchez","/img/Hugo].jpg"]
+  ]
+},
+
+"Estados Unidos": {
+  titulos: "0 Copas do Mundo",
+  historia: "Futebol em crescimento.",
+  jogadores: [
+    ["Pulisic","/img/Pulisic.avif"],
+    ["McKennie","/img/McKennie.webp"]
+  ],
+  lendas: [
+    ["Donovan","/img/donovan.jpg"],
+    ["Dempsey","/img/Dempsey.jpeg"]
+  ]
+},
+"Canadá": {
+  titulos: "0 Copas do Mundo",
+  historia: "Futebol em crescimento.",
+  jogadores: [
+    ["Alphonso Davies","/img/davides.webp"],
+    ["Tajon Buchanan","/img/Tajon_Buchanan_Canada_2788238c82.webp"]
+  ],
+  lendas: [
+    ["Pat Onstad","/img/Pat Onstad.jpg"],
+    ["Dwayne De Rosario","/img/Dwayne De Rosario.jpg"]
+  ]
+},
+"Japão": {
+  titulos: "0 Copas do Mundo",
+  historia: "Futebol em crescimento.",
+  jogadores: [
+    ["Zion Suzuki","/img/Zion Suzuki.webp"],
+    ["Kaoru Mitoma","/img/Kaoru Mitoma.webp"]
+  ],
+  lendas: [
+    ["Kazuyoshi Miura","/img/Kazuyoshi Miura.jpg"],
+    ["Kunishige Kamamoto","/img/Kunishige Kamamoto.jpg"]
+  ]
+},
+
+"Inglaterra": {
+  titulos: "1 Copa do Mundo",
+  historia: "Inventora do futebol moderno.",
+  jogadores: [
+    ["Harry Kane","/img/harry.jpg"],
+    ["Jude Bellingham","/img/beligol.webp"]
+  ],
+  lendas: [
+    ["Bobby Charlton","/img/bobby.jpeg"],
+    ["David Beckham","/img/bakham.jpeg"]
+  ]
+},
+"Coreia do Sul": {
+  titulos: "0 Copas do Mundo",
+  historia: "Melhor campanha foi semifinal em 2002.",
+  jogadores: [
+    ["Son Heung-min","/img/Son Heung-min.jpg"],
+    ["Kim Min-jae","/img/Kim Min-jae.webp"]
+  ],
+  lendas: [
+    ["Park Ji-sung","/img/Park Ji-sung.jpg"],
+    ["Cha Bum-kun","/img/Cha Bum-kun.jpg"]
+  ]
+},
+
+"Austrália": {
+  titulos: "0 Copas do Mundo",
+  historia: "Seleção competitiva da Ásia.",
+  jogadores: [
+    ["Mathew Ryan","/img/Mathew Ryan.jpg"],
+    ["Hrustic","/img/Hrustic.png"]
+  ],
+  lendas: [
+    ["Tim Cahill","/img/Tim Cahill.jpg"],
+    ["Viduka","/img/Viduka.jpg"]
+  ]
+},
+
+"Marrocos": {
+  titulos: "0 Copas do Mundo",
+  historia: "Semifinalista em 2022.",
+  jogadores: [
+    ["Hakimi","/img/Hakimi.jpg"],
+    ["Ziyech","/img/Ziyech.jpg"]
+  ],
+  lendas: [
+    ["Hadji","/img/Hadji.webp"],
+    ["Faras","/img/Faras.webp"]
+  ]
+},
+
+"Senegal": {
+  titulos: "0 Copas do Mundo",
+  historia: "Quartas em 2002.",
+  jogadores: [
+    ["Mané","/img/Mané.webp"],
+    ["Koulibaly","/img/Koulibaly.webp"]
+  ],
+  lendas: [
+    ["Diouf","/img/diouf.jpeg"],
+    ["Camara","/img/Camara.jpeg"]
+  ]
+},
+
+"Camarões": {
+  titulos: "0 Copas do Mundo",
+  historia: "Quartas em 1990.",
+  jogadores: [
+    ["Aboubakar","/img/Aboubakar.jpeg"],
+    ["Onana","/img/Onana.jpeg"]
+  ],
+  lendas: [
+    ["Roger Milla","/img/Roger Milla.jpeg"],
+    ["Eto'o","/img/Eto'o.jpg"]
+  ]
+},
+
+"Nigéria": {
+  titulos: "0 Copas do Mundo",
+  historia: "Seleção forte africana.",
+  jogadores: [
+    ["Osimhen","/img/Osimhen.jpeg"],
+    ["Iwobi","/img/Iwobi.webp"]
+  ],
+  lendas: [
+    ["Okocha","/img/Okocha.jpeg"],
+    ["Kanu","/img/Kanu.jpeg"]
+  ]
+},
+
+"Egito": {
+  titulos: "0 Copas do Mundo",
+  historia: "Maior campeão africano.",
+  jogadores: [
+    ["Salah","/img/Salah.jpeg"],
+    ["Trezeguet","/img/Trezeguet.jpg"]
+  ],
+  lendas: [
+    ["Hassan","/img/Hassan.jpeg"],
+    ["Ahmed Hassan","/img/Ahmed Hassan.jpeg"]
+  ]
+},
+
+"Gana": {
+  titulos: "0 Copas do Mundo",
+  historia: "Quartas em 2010.",
+  jogadores: [
+    ["Partey","/img/Partey.jpg"],
+    ["Kudus","/img/Kudus.jpeg"]
+  ],
+  lendas: [
+    ["Abedi Pelé","/img/Abedi Pelé.jpeg"],
+    ["Gyan","/img/Gyan.jpg"]
+  ]
+},
+
+"Dinamarca": {
+  titulos: "0 Copas do Mundo",
+  historia: "Euro 92 campeã.",
+  jogadores: [
+    ["Eriksen","/img/Eriksen.jpeg"],
+    ["Hojlund","/img/Hojlund.jpeg"]
+  ],
+  lendas: [
+    ["Schmeichel","/img/Schmeichel.jpeg"],
+    ["Laudrup","/img/Laudrup.jpeg"]
+  ]
+},
+
+"Suécia": {
+  titulos: "0 Copas do Mundo",
+  historia: "Vice em 1958.",
+  jogadores: [
+    ["Isak","/img/Isak.jpeg"],
+    ["Kulusevski","/img/Kulusevski.jpeg"]
+  ],
+  lendas: [
+    ["Zlatan","/img/Zlatan.jpeg"],
+    ["Larsson","/img/Larsson.jpg"]
+  ]
+},
+
+"Noruega": {
+  titulos: "0 Copas do Mundo",
+  historia: "Seleção em crescimento.",
+  jogadores: [
+    ["Haaland","/img/Haaland.jpeg"],
+    ["Odegaard","/img/odegaard.jpeg"]
+  ],
+  lendas: [
+    ["Solskjaer","/img/Solskjaer.jpg"],
+    ["Carew","/img/Carew.jpeg"]
+  ]
+},
+
+"Áustria": {
+  titulos: "0 Copas do Mundo",
+  historia: "Tradição europeia.",
+  jogadores: [
+    ["Alaba","/img/Alaba.jpeg"],
+    ["Sabitzer","/img/Sabitzer.jpeg"]
+  ],
+  lendas: [
+    ["Sindelar","/img/Sindelar.jpg"],
+    ["Polster","/img/polster.jpg"]
+  ]
+},
+
+"Turquia": {
+  titulos: "0 Copas do Mundo",
+  historia: "3º lugar em 2002.",
+  jogadores: [
+    ["Calhanoglu","/img/Calhanoglu.jpeg"],
+    ["Arda Guler","/img/Arda Guler.jpeg"]
+  ],
+  lendas: [
+    ["Sukur","/img/Sukur.jpeg"],
+    ["Rustu","/img/Rustu.webp"]
+  ]
+},
+
+"Arábia Saudita": {
+  titulos: "0 Copas do Mundo",
+  historia: "Vitória sobre Argentina em 2022.",
+  jogadores: [
+    ["Al-Dawsari","/img/Al-Dawsari.jpeg"],
+    ["Al-Owais","/img/Al-Owais.jpg"]
+  ],
+  lendas: [
+    ["Al-Jaber","/img/Al-Jaber.jpeg"],
+    ["Al-Qahtani","/img/Al-Qahtani.jpg"]
+  ]
+},
+
+"Catar": {
+  titulos: "0 Copas do Mundo",
+  historia: "Sede de 2022.",
+  jogadores: [
+    ["Afif","/img/Afif.jpeg"],
+    ["Almoez","/img/Almoez.jpeg"]
+  ],
+  lendas: [
+    ["Soria","/img/Soria.jpeg"],
+    ["Hassan Al-Haydos","/img/Hassan al.jpg"]
+  ]
+},
+
+"Colômbia": {
+  titulos: "0 Copas do Mundo",
+  historia: "Destaque em 2014.",
+  jogadores: [
+    ["Luis Díaz","/img/Luis Díaz.jpeg"],
+    ["James","/img/James.png"]
+  ],
+  lendas: [
+    ["Valderrama","/img/Valderrama.jpeg"],
+    ["Falcao","/img/Falcao.jpeg"]
+  ]
+},
+
+"Peru": {
+  titulos: "0 Copas do Mundo",
+  historia: "Tradição sul-americana.",
+  jogadores: [
+    ["Lapadula","/img/Lapadula.avif"],
+    ["Carrillo","/img/Carrillo.jpeg"]
+  ],
+  lendas: [
+    ["Cubillas","/img/Cubillas.jpg"],
+    ["Guerrero","/img/Guerrero.jpeg"]
+  ]
+},
+
+"Equador": {
+  titulos: "0 Copas do Mundo",
+  historia: "Seleção jovem.",
+  jogadores: [
+    ["Valencia","/img/Valencia.jpeg"],
+    ["Caicedo","/img/Caicedo.jpeg"]
+  ],
+  lendas: [
+    ["Delgado","/img/Delgado.jpeg"],
+    ["Antonio Valencia","/img/Antonio Valencia.jpeg"]
+  ]
+},
+
+"Paraguai": {
+  titulos: "0 Copas do Mundo",
+  historia: "Defesa forte.",
+  jogadores: [
+    ["Almiron","/img/Almiron.webp"],
+    ["Enciso","/img/Enciso.jpeg"]
+  ],
+  lendas: [
+    ["Chilavert","/img/Chilavert.jpeg"],
+    ["Santa Cruz","/img/Santa Cruz.jpg"]
+  ]
+},
+
+"Costa Rica": {
+  titulos: "0 Copas do Mundo",
+  historia: "Quartas em 2014.",
+  jogadores: [
+    ["Navas","/img/Navas.webp"],
+    ["Campbell","/img/Campbell.avif"]
+  ],
+  lendas: [
+    ["Bryan Ruiz","/img/Bryan Ruiz.jpeg"],
+    ["Wanchope","/img/Wanchope.jpeg"]
+  ]
+},
+
+"Panamá": {
+  titulos: "0 Copas do Mundo",
+  historia: "Estreia em 2018.",
+  jogadores: [
+    ["Barcenas","/img/Barcenas.jpg"],
+    ["Murillo","/img/Murillo.jpg"]
+  ],
+  lendas: [
+    ["Blas Perez","/img/Blas Perez.jpeg"],
+    ["Torres","/img/Torres.jpeg"]
+  ]
+}
+};
+// LISTA DOS 42
+const paises = [
+  ["Brasil","br"],
+  ["Argentina","ar"],
+  ["Uruguai","uy"],
+  ["Colômbia","co"],
+  ["Peru","pe"],
+  ["Equador","ec"],
+  ["Paraguai","py"],
+  
+  ["Estados Unidos","us"],
+  ["Portugal","pt"],
+["França","fr"],
+["Alemanha","de"],
+["Espanha","es"],
+["Inglaterra","https://upload.wikimedia.org/wikipedia/en/b/be/Flag_of_England.svg"],
+["Holanda","nl"],
+["Bélgica","be"],
+["Croácia","hr"],
+["México","mx"],
+["Canadá","ca"],
+["Japão","jp"],
+["Coreia do Sul","kr"],
+["Austrália","au"],
+["Marrocos","ma"],
+["Senegal","sn"],
+["Camarões","cm"],
+["Nigéria","ng"],
+["Egito","eg"],
+["Gana","gh"],
+["Suíça","ch"],
+["Dinamarca","dk"],
+["Suécia","se"],
+["Noruega","no"],
+["Áustria","at"],
+["Turquia","tr"],
+["Arábia Saudita","sa"],
+["Catar","qa"],
+["Costa Rica","cr"],
+["Panamá","pa"]
+];
+
+const container = document.getElementById("container");
+const detalhe = document.getElementById("detalhe");
+
+paises.forEach(p => {
+  const div = document.createElement("div");
+  div.className = "card";
+
+  const img = p[1].startsWith("http")
+    ? p[1]
+    : "https://flagcdn.com/w160/" + p[1] + ".png";
+
+  div.innerHTML = `
+    <img src="${img}">
+    <h3>${p[0]}</h3>
+  `;
+
+  div.onclick = () => abrir(p[0]);
+  container.appendChild(div);
+});
+
+function abrir(nome){
+  const info = dados[nome] || {
+    titulos: "Sem dados ainda",
+    historia: "Informações em breve",
+    jogadores: [],
+    lendas: []
+  };
+
+  container.style.display="none";
+  detalhe.style.display="block";
+
+  detalhe.innerHTML = `
+    <button onclick="voltar()">⬅ Voltar</button>
+    <h2>${nome}</h2>
+    <p>🏆 ${info.titulos}</p>
+    <p>📜 ${info.historia}</p>
+
+    <h3>⭐ Jogadores</h3>
+    <div class="jogadores">
+      ${info.jogadores.map(j => `<div><img src="${j[1] || 'https://via.placeholder.com/100'}"><br>${j[0]}</div>`).join("")}
+    </div>
+
+    <h3>👑 Lendas</h3>
+    <div class="jogadores">
+      ${info.lendas.map(j => `<div><img src="${j[1] || 'https://via.placeholder.com/100'}"><br>${j[0]}</div>`).join("")}
+    </div>
+  `;
+}
+
+function voltar(){
+  detalhe.style.display="none";
+  container.style.display="grid";
+}
+</script>
+<script>
+  
+</script>
+</body>
+</html>

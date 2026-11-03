@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador Copa do Mundo 2026</title>
+  <div style="text-align:center; margin:20px;">
+  <a href="index.html">
+    <button style="
+      font-size:16px;
+      padding:10px 20px;
+      background:#f1c40f;
+      color:black;
+      font-weight:bold;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+    ">
+      Voltar a pagina inicial
+    </button>
+  </a>
+</div>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #09090b, #18181b);
+      color: white;
+      padding: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 48px;
+      color: gold;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #ccc;
+      margin-bottom: 40px;
+      font-size: 18px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      gap: 25px;
+    }
+
+    .grupo {
+      background: #27272a;
+      border-radius: 25px;
+      padding: 20px;
+      border: 1px solid #3f3f46;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    .grupo h2 {
+      text-align: center;
+      color: gold;
+      margin-bottom: 20px;
+      font-size: 32px;
+    }
+
+    .jogo {
+      background: #3f3f46;
+      padding: 15px;
+      border-radius: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .placar {
+      color: gold;
+      font-size: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th {
+      background: #3f3f46;
+      color: gold;
+      padding: 10px;
+    }
+
+    td {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #3f3f46;
+    }
+
+    td:first-child {
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .classificado {
+      background: rgba(0, 255, 0, 0.15);
+    }
+
+    .btn-area {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    button {
+      background: gold;
+      color: black;
+      border: none;
+      padding: 18px 40px;
+      font-size: 20px;
+      font-weight: bold;
+      border-radius: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: #ffe066;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Copa do Mundo 2026</h1>
+  <p class="subtitle">Simulador completo da Copa do Mundo 2026 até a final</p>
+
+  <div class="container" id="container"></div>
+
+  <div class="btn-area">
+    <button onclick="simular()">Simular Novamente</button>
+  </div>
+
+  <script>
+    const grupos = {
+      A: ["México", "África do Sul", "Coreia do Sul", "República Tcheca"],
+      B: ["Canadá", "Bósnia", "Catar", "Suíça"],
+      C: ["Brasil", "Marrocos", "Haiti", "Escócia"],
+      D: ["Estados Unidos", "Paraguai", "Austrália", "Turquia"],
+      E: ["Alemanha", "Curaçao", "Costa do Marfim", "Equador"],
+      F: ["Holanda", "Japão", "Suécia", "Tunísia"],
+      G: ["Bélgica", "Egito", "Irã", "Colômbia"],
+      H: ["Espanha", "Cabo Verde", "Arábia Saudita", "Uruguai"],
+      I: ["França", "Senegal", "Iraque", "Noruega"],
+      J: ["Argentina", "Argélia", "Áustria", "Jordânia"]
+    };
+
+    function gerarResultado() {
+      return {
+        gols1: Math.floor(Math.random() * 6),
+        gols2: Math.floor(Math.random() * 6)
+      };
+    }
+
+    function gerarGrupo(times) {
+      const tabela = {};
+
+      times.forEach(time => {
+        tabela[time] = {
+          pts: 0,
+          vit: 0,
+          emp: 0,
+          der: 0,
+          gp: 0,
+          gc: 0,
+          sg: 0
+        };
+      });
+
+      const jogos = [];
+
+      for (let i = 0; i < times.length; i++) {
+        for (let j = i + 1; j < times.length; j++) {
+          const resultado = gerarResultado();
+
+          const t1 = times[i];
+          const t2 = times[j];
+
+          tabela[t1].gp += resultado.gols1;
+          tabela[t1].gc += resultado.gols2;
+
+          tabela[t2].gp += resultado.gols2;
+          tabela[t2].gc += resultado.gols1;
+
+          tabela[t1].sg = tabela[t1].gp - tabela[t1].gc;
+          tabela[t2].sg = tabela[t2].gp - tabela[t2].gc;
+
+          if (resultado.gols1 > resultado.gols2) {
+            tabela[t1].pts += 3;
+            tabela[t1].vit++;
+            tabela[t2].der++;
+          } else if (resultado.gols2 > resultado.gols1) {
+            tabela[t2].pts += 3;
+            tabela[t2].vit++;
+            tabela[t1].der++;
+          } else {
+            tabela[t1].pts++;
+            tabela[t2].pts++;
+            tabela[t1].emp++;
+            tabela[t2].emp++;
+          }
+
+          jogos.push(`${t1}|${resultado.gols1} x ${resultado.gols2}|${t2}`);
+        }
+      }
+
+      const classificacao = Object.entries(tabela).sort((a, b) => {
+        if (b[1].pts !== a[1].pts) return b[1].pts - a[1].pts;
+        if (b[1].sg !== a[1].sg) return b[1].sg - a[1].sg;
+        return b[1].gp - a[1].gp;
+      });
+
+      return { jogos, classificacao };
+    }
+
+    function escolherVencedor(time1, time2) {
+      const gols1 = Math.floor(Math.random() * 6);
+      const gols2 = Math.floor(Math.random() * 6);
+
+      if (gols1 > gols2) {
+        return { vencedor: time1, placar: `${gols1} x ${gols2}` };
+      }
+
+      if (gols2 > gols1) {
+        return { vencedor: time2, placar: `${gols1} x ${gols2}` };
+      }
+
+      return Math.random() > 0.5
+        ? { vencedor: time1, placar: `${gols1} x ${gols2} (pênaltis)` }
+        : { vencedor: time2, placar: `${gols1} x ${gols2} (pênaltis)` };
+    }
+
+    function criarMataMata(classificados) {
+      let html = `
+        <div style="margin-top:50px;">
+          <h1 style="margin-bottom:30px;">Mata-Mata</h1>
+      `;
+
+      const oitavas = [];
+
+      for (let i = 0; i < classificados.length; i += 2) {
+        const jogo = escolherVencedor(classificados[i], classificados[i + 1]);
+
+        html += `
+          <div class="grupo">
+            <h2>Oitavas</h2>
+            <div class="jogo">
+              <span>${classificados[i]}</span>
+              <span class="placar">${jogo.placar}</span>
+              <span>${classificados[i + 1]}</span>
+            </div>
+          </div>
+        `;
+
+        oitavas.push(jogo.vencedor);
+      }
+
+      const quartas = [];
+
+      for (let i = 0; i < oitavas.length; i += 2) {
+        const jogo = escolherVencedor(oitavas[i], oitavas[i + 1]);
+
+        html += `
+          <div class="grupo">
+            <h2>Quartas</h2>
+            <div class="jogo">
+              <span>${oitavas[i]}</span>
+              <span class="placar">${jogo.placar}</span>
+              <span>${oitavas[i + 1]}</span>
+            </div>
+          </div>
+        `;
+
+        quartas.push(jogo.vencedor);
+      }
+
+      const semifinal = [];
+
+      for (let i = 0; i < quartas.length; i += 2) {
+        const jogo = escolherVencedor(quartas[i], quartas[i + 1]);
+
+        html += `
+          <div class="grupo">
+            <h2>Semifinal</h2>
+            <div class="jogo">
+              <span>${quartas[i]}</span>
+              <span class="placar">${jogo.placar}</span>
+              <span>${quartas[i + 1]}</span>
+            </div>
+          </div>
+        `;
+
+        semifinal.push(jogo.vencedor);
+      }
+
+      const final = escolherVencedor(semifinal[0], semifinal[1]);
+
+      html += `
+        <div class="grupo" style="border:2px solid gold;">
+          <h2>FINAL</h2>
+          <div class="jogo">
+            <span>${semifinal[0]}</span>
+            <span class="placar">${final.placar}</span>
+            <span>${semifinal[1]}</span>
+          </div>
+
+          <h2 style="margin-top:25px; color:#00ff88;">
+            🏆 Campeão: ${final.vencedor}
+          </h2>
+        </div>
+      `;
+
+      html += `</div>`;
+
+      return html;
+    }
+
+    function simular() {
+      const container = document.getElementById('container');
+      container.innerHTML = '';
+
+      const classificados = [];
+
+      Object.entries(grupos).forEach(([grupo, times]) => {
+        const dados = gerarGrupo(times);
+
+        const div = document.createElement('div');
+        div.className = 'grupo';
+
+        let html = `<h2>Grupo ${grupo}</h2>`;
+
+        dados.jogos.forEach(jogo => {
+          const partes = jogo.split('|');
+
+          html += `
+            <div class="jogo">
+              <span>${partes[0]}</span>
+              <span class="placar">${partes[1]}</span>
+              <span>${partes[2]}</span>
+            </div>
+          `;
+        });
+
+        html += `
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>P</th>
+                <th>V</th>
+                <th>E</th>
+                <th>D</th>
+                <th>SG</th>
+                <th>GP</th>
+              </tr>
+            </thead>
+            <tbody>
+        `;
+
+        dados.classificacao.forEach(([time, info], index) => {
+          if (index < 2) classificados.push(time);
+
+          html += `
+            <tr class="${index < 2 ? 'classificado' : ''}">
+              <td>${time}</td>
+              <td>${info.pts}</td>
+              <td>${info.vit}</td>
+              <td>${info.emp}</td>
+              <td>${info.der}</td>
+              <td>${info.sg}</td>
+              <td>${info.gp}</td>
+            </tr>
+          `;
+        });
+
+        html += `</tbody></table>`;
+
+        div.innerHTML = html;
+        container.appendChild(div);
+      });
+
+      const mataMata = document.createElement('div');
+      mataMata.innerHTML = criarMataMata(classificados.slice(0, 16));
+      container.appendChild(mataMata);
+    }
+
+    simular();
+  </script>
+
+</body>
+</html>

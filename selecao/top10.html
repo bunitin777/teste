@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <div id="tela-detalhes">
+    <button class="btn-voltar" onclick="window.location.href='top10.html'">⬅ Voltar para pagina</button>
+    <h1 id="nome-jogador"></h1>
+    <div class="galeria" id="fotos-jogador"></div>
+    
+    <div class="historia-box">
+        <h2>História pela Seleção</h2>
+        <p id="texto-historia"></p>
+        <button class="btn-voltar" onclick="window.location.href='index.html'">Voltar para o Início</button>
+    </div>
+</div>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(120deg,#0f2027,#203a43,#2c5364);
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* TELA INICIAL */
+        #pagina-inicial { padding: 20px; text-align: center; }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 15px;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .card:hover { transform: scale(1.05); background: rgba(255,255,255,0.2); }
+
+        .card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* TELA DE DETALHES */
+        #tela-detalhes {
+            display: none;
+            padding: 30px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Estilo padronizado para todos os botões de voltar */
+        .btn-voltar {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 20px;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+      
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .galeria img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .historia-box {
+            background: rgba(0,0,0,0.4);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 20px;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        .btn-final {
+            margin-top: 20px;
+            width: 100%; /* Faz o botão de baixo ocupar a largura da caixa */
+        }
+
+        h1 { font-size: 2.5rem; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div id="pagina-inicial">
+        <h1>🌟 Lendas do Futebol</h1>
+        <p>Clique para ver fotos e histórias pela seleção</p>
+        <div class="container" id="grid-jogadores"></div>
+    </div>
+
+    <div id="tela-detalhes">
+        <button class="btn-voltar" onclick="voltar()">⬅ Voltar</button>
+        
+        <h1 id="nome-jogador"></h1>
+        
+        <div class="galeria" id="fotos-jogador"></div>
+        
+        <div class="historia-box">
+            <h2>História pela Seleção</h2>
+            <p id="texto-historia"></p>
+            
+        </div>
+    </div>
+
+    <script>
+        const dadosJogadores = {
+            "Neymar": {
+                capa: "/img/ney.jpg",
+                historia: "Maior artilheiro da Seleção Brasileira em jogos oficiais. Conquistou a Copa das Confederações 2013 e o Ouro Olímpico em 2016, sendo a referência técnica do Brasil no século XXI.",
+                fotos: ["/img/ney.jpg", "/img/nj1.jpg", "/img/nj2.jpg"]
+            },
+            "Pelé": {
+                capa: "/img/peléj.webp",
+                historia: "O Rei do Futebol. Único jogador a vencer 3 Copas do Mundo (1958, 1962, 1970). Marcou o mundo com sua genialidade e parou guerras com sua presença em campo.",
+                fotos: ["/img/peléj.webp", "/img/pl1.webp"]
+            },
+            "Cristiano Ronaldo": {
+                capa: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg",
+                historia: "Maior artilheiro da história das seleções nacionais. Liderou Portugal na conquista histórica da Eurocopa 2016 e da Liga das Nações 2019.",
+                fotos: ["/img/cr7.jpeg", "/img/cr71.jpg"]
+            },
+            "Messi": {
+                capa: "/img/messi.webp",
+                historia: "Gênio absoluto. Levou a Argentina ao topo do mundo na Copa de 2022, além de conquistar a Copa América 2021 e a Finalíssima.",
+                fotos: ["/img/messi1.jpg", "/img/messi123.webp"]
+            },
+            "Ronaldinho": {
+                capa: "/img/ronaldinho.jpeg",
+                historia: "O Bruxo. Encantou o mundo com sua alegria. Foi peça fundamental no Penta em 2002, com um gol antológico de falta contra a Inglaterra.",
+                fotos: ["/img/ronaldinho.jpeg", "/img/ronaldinho123.jpg"]
+            },
+            "Ronaldo Fenômeno": {
+                capa: "/img/fenomeno.jpg",
+                historia: "O herói de 2002. Após graves lesões, deu a volta por cima e marcou 8 gols na Copa da Coreia e Japão, garantindo o título mundial ao Brasil.",
+                fotos: ["/img/fenomeno.jpg", "/img/nazario.webp"]
+            },
+            "Garrincha": {
+                capa: "/img/garrincha.jpeg",
+                historia: "O Anjo das Pernas Tortas. Foi o grande protagonista do Bicampeonato Mundial de 1962, assumindo a responsabilidade após a lesão de Pelé.",
+                fotos: ["/img/garrincha.jpeg", "/img/garrincha123.jpg"]
+            },
+            "Lewandowski": {
+                capa: "/img/lewa.jpg",
+                historia: "O maior jogador da história da Polônia. Artilheiro implacável e capitão, levou sua seleção a diversas competições internacionais importantes.",
+                fotos: ["/img/lewa.jpg", "/img/lewando.jpeg"]
+            },
+            "Yashin": {
+                capa: "/img/yashin.jpeg",
+                historia: "O Aranha Negra. Único goleiro da história a vencer a Bola de Ouro. Defendeu a União Soviética, conquistando a Eurocopa de 1960 e o Ouro Olímpico.",
+                fotos: ["/img/yashin.jpeg", "/img/yashin1.jpg"]
+            },
+            "Beckenbauer": {
+                capa: "/img/beck.jpeg",
+                historia: "O Kaiser. Revolucionou o futebol como líbero. Venceu a Copa do Mundo pela Alemanha como jogador (1974) e como treinador (1990).",
+                fotos: ["/img/beck.jpeg", "/img/beckbauer123.jpeg"]
+            }
+        };
+
+        function renderizarCards() {
+            const grid = document.getElementById('grid-jogadores');
+            grid.innerHTML = "";
+            for (let nome in dadosJogadores) {
+                grid.innerHTML += `
+                    <div class="card" onclick="mostrarDetalhes('${nome}')">
+                        <img src="${dadosJogadores[nome].capa}" alt="${nome}">
+                        <h3>${nome}</h3>
+                    </div>
+                `;
+            }
+        }
+
+        function mostrarDetalhes(nome) {
+            const j = dadosJogadores[nome];
+            document.getElementById('nome-jogador').innerText = nome;
+            document.getElementById('texto-historia').innerText = j.historia;
+            
+            const galeria = document.getElementById('fotos-jogador');
+            galeria.innerHTML = "";
+            j.fotos.forEach(foto => {
+                galeria.innerHTML += `<img src="${foto}" alt="Foto de ${nome}">`;
+            });
+
+            document.getElementById('pagina-inicial').style.display = 'none';
+            document.getElementById('tela-detalhes').style.display = 'block';
+            window.scrollTo(0,0);
+        }
+
+        function voltar() {
+            document.getElementById('pagina-inicial').style.display = 'block';
+            document.getElementById('tela-detalhes').style.display = 'none';
+        }
+
+        renderizarCards();
+    </script>
+</body>
+</html>
